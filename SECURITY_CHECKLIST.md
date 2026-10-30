@@ -1,0 +1,11 @@
+# Security checklist
+- [x] Helmet security headers
+- [x] Rate limiting on API and application submission routes
+- [x] JSON body limit (20 KB)
+- [x] Server-side validation
+- [x] Prepared SQL statements / bound parameters
+- [x] Validate opportunity exists and is open before insert
+- [x] Generic server errors; no stack traces sent to clients
+- [ ] Enable HTTPS on hosting
+- [ ] Add privacy notice, retention policy and database backups
+- [ ] Add spam controls/monitoring before public production use

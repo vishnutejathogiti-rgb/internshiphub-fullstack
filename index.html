@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InternshipHub - Internship Portal</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f8fc;
+  color: #20243a;
+  line-height: 1.6;
+}
+
+.wrap {
+  width: min(1080px, calc(100% - 32px));
+  margin: auto;
+}
+
+header {
+  background: white;
+  border-bottom: 1px solid #e5e7ef;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #5145e5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hero {
+  padding: 55px 0 30px;
+}
+
+.eyebrow {
+  color: #5145e5;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+h1 {
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.15;
+  margin: 12px 0;
+}
+
+h1 span {
+  color: #5145e5;
+}
+
+h2 {
+  font-size: 32px;
+  margin: 8px 0;
+}
+
+.intro, .muted {
+  color: #73798b;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 20px 0 60px;
+}
+
+.stat, .panel, .card, .formbox {
+  background: white;
+  border: 1px solid #e5e7ef;
+  border-radius: 14px;
+}
+
+.stat {
+  padding: 20px;
+}
+
+.stat strong, .stat span {
+  display: block;
+}
+
+.stat strong {
+  font-size: 24px;
+}
+
+.stat span {
+  color: #73798b;
+}
+
+section {
+  margin-bottom: 60px;
+}
+
+.panel, .formbox {
+  padding: 18px;
+  margin: 20px 0;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 12px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d9deea;
+  border-radius: 9px;
+  font: inherit;
+  background: white;
+}
+
+textarea {
+  min-height: 110px;
+}
+
+button {
+  background: #5145e5;
+  color: white;
+  border: 1px solid #5145e5;
+  border-radius: 9px;
+  padding: 11px 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.light {
+  background: white;
+  color: #20243a;
+  border-color: #ddd;
+}
+
+.results {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #73798b;
+  margin: 18px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.card {
+  padding: 22px;
+  min-width: 0;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 21px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.tag {
+  background: #efeff8;
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 12px;
+}
+
+.desc {
+  color: #555c70;
+  font-size: 14px;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+  margin-top: 16px;
+}
+
+.formgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.notice {
+  padding: 13px;
+  background: #fff4d9;
+  border: 1px solid #efd99b;
+  border-radius: 9px;
+  margin: 12px 0;
+}
+
+.success {
+  padding: 13px;
+  background: #e8f8ef;
+  border: 1px solid #bce8ce;
+  border-radius: 9px;
+  margin: 12px 0;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+footer {
+  background: #20243a;
+  color: white;
+  padding: 28px 0;
+  margin-top: 50px;
+}
+
+footer p {
+  color: #c4c8da;
+}
+
+@media(max-width:760px) {
+  .grid, .stats, .formgrid, .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .results {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">↗ InternshipHub</a>
+    <a href="#apply">Apply Now ↓</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <span class="eyebrow">CAREER OPPORTUNITIES</span>
+  <h1>Find the role that <span>moves you forward.</span></h1>
+  <p class="intro">
+    Explore internship opportunities and apply securely online.
+  </p>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <strong id="open-count">0</strong>
+    <span>Open opportunities</span>
+  </div>
+  <div class="stat">
+    <strong>Secure Form</strong>
+    <span>Validated submissions</span>
+  </div>
+  <div class="stat">
+    <strong>Live API</strong>
+    <span>Connected backend</span>
+  </div>
+</div>
+
+<section id="opportunities">
+  <span class="eyebrow">EXPLORE</span>
+  <h2>Internship Opportunities</h2>
+  <p class="intro">Search by role, company, location or skill.</p>
+
+  <div class="panel">
+    <div class="filters">
+      <input
+        id="search"
+        type="search"
+        placeholder="Search internships..."
+        aria-label="Search internships"
+      >
+
+      <select id="mode" aria-label="Work mode">
+        <option value="">All work modes</option>
+        <option value="remote">Remote</option>
+        <option value="hybrid">Hybrid</option>
+        <option value="onsite">Onsite</option>
+      </select>
+
+      <button id="retry" class="light" type="button">
+        Retry Loading
+      </button>
+    </div>
+  </div>
+
+  <div class="results">
+    <span id="count" aria-live="polite">Loading opportunities...</span>
+    <span id="api-status">Connecting to API...</span>
+  </div>
+
+  <div id="list" class="grid">
+    <p>Loading opportunities...</p>
+  </div>
+
+  <div class="pagination">
+    <button id="prev" class="light" disabled>← Previous</button>
+    <span id="page">Page 1</span>
+    <button id="next" disabled>Next →</button>
+  </div>
+</section>
+
+<section id="apply">
+  <span class="eyebrow">TAKE THE NEXT STEP</span>
+  <h2>Application Form</h2>
+  <p class="intro">
+    Submit your application. Required fields are marked with *.
+  </p>
+
+  <div class="formbox">
+    <div id="message" role="status" aria-live="polite"></div>
+
+    <form id="application-form">
+      <div class="formgrid">
+
+        <div class="field full">
+          <label for="opportunityId">Select Internship *</label>
+          <select id="opportunityId" required>
+            <option value="">Loading opportunities...</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="fullName">Full Name *</label>
+          <input
+            id="fullName"
+            type="text"
+            minlength="2"
+            maxlength="80"
+            autocomplete="name"
+            placeholder="Enter your full name"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address *</label>
+          <input
+            id="email"
+            type="email"
+            maxlength="254"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input
+            id="phone"
+            type="tel"
+            maxlength="20"
+            autocomplete="tel"
+            placeholder="+91 9876543210"
+          >
+        </div>
+
+        <div class="field full">
+          <label for="coverLetter">Cover Letter</label>
+          <textarea
+            id="coverLetter"
+            maxlength="2000"
+            placeholder="Tell us why you are interested..."
+          ></textarea>
+        </div>
+
+      </div>
+
+      <p>
+        <button id="submit" type="submit">
+          Submit Application
+        </button>
+      </p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>InternshipHub</strong>
+    <p>Internship Portal - Secure Application Integration</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const API = "/api/opportunities";
+const APPLICATION_API = "/api/applications";
+const PAGE_SIZE = 6;
+
+let jobs = [];
+let currentPage = 1;
+
+function showMessage(message, success = false) {
+  const box = $("message");
+  box.className = success ? "success" : "notice";
+  box.textContent = message;
+}
+
+function getFilteredJobs() {
+  const query = $("search").value.trim().toLowerCase();
+  const mode = $("mode").value.toLowerCase();
+
+  return jobs.filter(job => {
+    const skills = Array.isArray(job.skills) ? job.skills : [];
+
+    const matchesMode = !mode || job.workMode.toLowerCase() === mode;
+
+    const text = [
+      job.title,
+      job.company,
+      job.location,
+      job.description,
+      ...skills
+    ].join(" ").toLowerCase();
+
+    const matchesSearch = !query || text.includes(query);
+
+    return job.status !== "closed" &&
+      matchesMode &&
+      matchesSearch;
+  });
+}
+
+function updateApplicationOptions() {
+  const select = $("opportunityId");
+  const previousValue = select.value;
+
+  select.replaceChildren();
+
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Select an internship";
+  select.appendChild(placeholder);
+
+  jobs
+    .filter(job => job.status !== "closed")
+    .forEach(job => {
+      const option = document.createElement("option");
+      option.value = String(job.id);
+      option.textContent = job.title + " - " + job.company;
+      select.appendChild(option);
+    });
+
+  if ([...select.options].some(option => option.value === previousValue)) {
+    select.value = previousValue;
+  }
+}
+
+function renderJobs() {
+  const results = getFilteredJobs();
+  const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE));
+
+  currentPage = Math.min(currentPage, totalPages);
+
+  const list = $("list");
+  list.replaceChildren();
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const visibleJobs = results.slice(start, start + PAGE_SIZE);
+
+  if (visibleJobs.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "notice";
+    empty.textContent = "No matching internships found. Try changing your search or filters.";
+    list.appendChild(empty);
+  }
+
+  visibleJobs.forEach(job => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const title = document.createElement("h3");
+    title.textContent = job.title;
+
+    const company = document.createElement("p");
+    company.className = "muted";
+    company.textContent = job.company;
+
+    const description = document.createElement("p");
+    description.className = "desc";
+    description.textContent = job.description || "Explore this internship opportunity.";
+
+    const location = document.createElement("p");
+    location.className = "muted";
+    location.textContent = "Location: " + job.location;
+
+    const tags = document.createElement("div");
+    tags.className = "tags";
+
+    const skills = Array.isArray(job.skills) ? job.skills : [];
+
+    [job.workMode, ...skills].forEach(skill => {
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = skill;
+      tags.appendChild(tag);
+    });
+
+    const footer = document.createElement("div");
+    footer.className = "foot";
+
+    const applyButton = document.createElement("button");
+    applyButton.type = "button";
+    applyButton.textContent = "Apply Now →";
+
+    applyButton.addEventListener("click", () => {
+      $("opportunityId").value = String(job.id);
+      $("apply").scrollIntoView({ behavior: "smooth" });
+      $("fullName").focus();
+    });
+
+    footer.append(location, applyButton);
+    card.append(title, company, description, tags, footer);
+    list.appendChild(card);
+  });
+
+  $("count").textContent = results.length + " open opportunities";
+  $("open-count").textContent = jobs.filter(job => job.status !== "closed").length;
+
+  $("page").textContent = "Page " + currentPage + " of " + totalPages;
+
+  $("prev").disabled = currentPage <= 1;
+  $("next").disabled = currentPage >= totalPages;
+
+  updateApplicationOptions();
+}
+
+async function loadOpportunities() {
+  $("api-status").textContent = "Loading API...";
+  $("count").textContent = "Loading opportunities...";
+  $("retry").disabled = true;
+
+  const loading = document.createElement("p");
+  loading.textContent = "Loading internship records...";
+  $("list").replaceChildren(loading);
+
+  try {
+    const response = await fetch(API, {
+      method: "GET",
+      headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) {
+      throw new Error("Server returned HTTP " + response.status);
+    }
+
+    const result = await response.json();
+
+    const records = Array.isArray(result)
+      ? result
+      : result.data;
+
+    if (!Array.isArray(records)) {
+      throw new Error("The API response does not contain an internship list.");
+    }
+
+    jobs = records.map(job => ({
+      ...job,
+      workMode: job.workMode || job.work_mode || "onsite",
+      skills: Array.isArray(job.skills)
+        ? job.skills
+        : typeof job.skills === "string"
+          ? job.skills.split(",").map(s => s.trim()).filter(Boolean)
+          : []
+    }));
+
+    currentPage = 1;
+    $("api-status").textContent = "Connected successfully";
+    renderJobs();
+
+  } catch (error) {
+    $("api-status").textContent = "API connection failed";
+    $("count").textContent = "Unable to load opportunities";
+
+    const message = document.createElement("div");
+    message.className = "notice";
+    message.textContent =
+      "Could not load internships: " + error.message +
+      ". Please check the server and click Retry Loading.";
+
+    $("list").replaceChildren(message);
+
+    console.error("Internship loading error:", error);
+
+  } finally {
+    $("retry").disabled = false;
+  }
+}
+
+// Search and filter
+$("search").addEventListener("input", () => {
+  currentPage = 1;
+  renderJobs();
+});
+
+$("mode").addEventListener("change", () => {
+  currentPage = 1;
+  renderJobs();
+});
+
+// Retry
+$("retry").addEventListener("click", loadOpportunities);
+
+// Pagination
+$("prev").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderJobs();
+  }
+});
+
+$("next").addEventListener("click", () => {
+  const totalPages = Math.ceil(getFilteredJobs().length / PAGE_SIZE);
+
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderJobs();
+  }
+});
+
+// Secure application submission
+$("application-form").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+
+  if (!form.reportValidity()) return;
+
+  const application = {
+    opportunityId: Number($("opportunityId").value),
+    fullName: $("fullName").value.trim(),
+    email: $("email").value.trim(),
+    phone: $("phone").value.trim(),
+    coverLetter: $("coverLetter").value.trim()
+  };
+
+  if (!application.opportunityId) {
+    showMessage("Please select an internship.");
+    return;
+  }
+
+  if (application.fullName.length < 2 ||
+      application.fullName.length > 80) {
+    showMessage("Name must contain between 2 and 80 characters.");
+    return;
+  }
+
+  if (application.coverLetter.length > 2000) {
+    showMessage("Cover letter cannot exceed 2000 characters.");
+    return;
+  }
+
+  const button = $("submit");
+  button.disabled = true;
+  button.textContent = "Submitting...";
+
+  try {
+    const response = await fetch(APPLICATION_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(application)
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      const errors = result.fields
+        ? Object.values(result.fields).join(" ")
+        : result.error || "Application submission failed.";
+
+      throw new Error(errors);
+    }
+
+    showMessage(
+      (result.message || "Application submitted successfully!") +
+      (result.applicationId
+        ? " Reference: " + result.applicationId
+        : ""),
+      true
+    );
+
+    form.reset();
+
+  } catch (error) {
+    showMessage(error.message + " Please check your details and try again.");
+    console.error("Application error:", error);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Submit Application";
+  }
+});
+
+// Start application
+loadOpportunities();
+
+</script>
+
+</body>
+</html>
+   
